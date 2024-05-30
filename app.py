@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route("/")
 def Home():
     try:
-        data = {"success": True, "payload": "/* Application-specific data would go here. */"}
+        data = {"success": True, "payload": "Server sunning..."}
         return jsonify(data), 200
     except requests.exceptions.RequestException as e:
         return jsonify({'error': str(e)}), 500
