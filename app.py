@@ -1,81 +1,52 @@
 from flask import Flask, jsonify, request
+from authentication import auth
+from geckocoin import coin_gecko
+from jupiter import coin_jupiter
+from dexscreener import coin_dex
+from coin_wallet import coin_wallet
+from check_app import check_app
 import requests
+import os
+import psycopg2
+
 
 app = Flask(__name__)
+url = os.getenv("DATABASE_URL")
+conn = psycopg2.connect(url)
+curr = conn.cursor()
 
 
 @app.route("/")
-def Home():
-    try:
-        data = {"success": True, "payload": "Server sunning..."}
-        return jsonify(data), 200
-    except requests.exceptions.RequestException as e:
-        return jsonify({'error': str(e)}), 500
+def home():
+    return check_app(curr)
 
 
+# for authentication
 @app.route("/password/<string:password>")
 def user_password_auth(password):
-    try:
-        if password == "password":
-            data = {"success": True, "access":"granted"}
-        else:
-            data = {"success": True, "access":"denied"}
-
-        return jsonify(data), 200
-    except requests.exceptions.RequestException as e:
-        return jsonify({'error': str(e)}), 500
+    return auth(password)
 
 
+# get top 100 crypto
 @app.route("/geckocoins")
 def gecko_coins():
-    api_url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=cad' 
-    # headers = {
-    #     'x_cg_pro_api_key': 'CG-6T5VV59o7CwUsNvkB3UrrQ8N',  
-    #     'Content-Type': 'application/json'
-    # }
-    try:
-        response = requests.get(api_url)
-        data = response.json()
-        return jsonify(data), 200
-    except requests.exceptions.RequestException as e:
-        return jsonify({'error': str(e)}), 500
+    return coin_gecko()
 
 
+# get top 100 coin in solona
 @app.route("/jupitercoin")
 def jupitercoin():
-
-    api_url = 'https://token.jup.ag/strict' 
-    # headers = {
-    #     'x_cg_pro_api_key': 'CG-6T5VV59o7CwUsNvkB3UrrQ8N',  
-    #     'Content-Type': 'application/json'
-    # }
-
-    try:
-        response = requests.get(api_url)
-        data = response.json()
-        return jsonify(data), 200
-    except requests.exceptions.RequestException as e:
-        return jsonify({'error': str(e)}), 500
+    return coin_jupiter()
 
 
+# get data for sigle coin
 @app.route("/dexscreener_coin/<string:coin_id>")
 def dexscreener_coin_data(coin_id):
-
-    api_url = f'https://api.dexscreener.com/latest/dex/tokens/{coin_id}'
-    # headers = {
-    #     'x_cg_pro_api_key': 'CG-6T5VV59o7CwUsNvkB3UrrQ8N',  
-    #     'Content-Type': 'application/json'
-    # }
-
-    try:
-        response = requests.get(api_url)
-        data = response.json()
-        return jsonify(data), 200
-    except requests.exceptions.RequestException as e:
-        return jsonify({'error': str(e)}), 500
+    return coin_dex(coin_id)
 
 
-if __name__ ==  "__main__":
-    app.run(debug=True)
-
+# get the wallet data 
+@app.route("/wallet/<string:coin_id>")
+def wallet_data(coin_id):
+    return coin_wallet(coin_id)
 
