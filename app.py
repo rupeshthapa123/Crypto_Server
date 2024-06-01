@@ -11,6 +11,7 @@ import psycopg2
 
 
 app = Flask(__name__)
+
 url = os.getenv("DATABASE_URL")
 conn = psycopg2.connect(url)
 curr = conn.cursor()
@@ -27,7 +28,7 @@ def user_password_auth(password):
     return auth(password)
 
 
-# get top 100 crypto
+# get top 100 crypto data
 @app.route("/geckocoins")
 def gecko_coins():
     return coin_gecko()
