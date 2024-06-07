@@ -15,6 +15,7 @@ instance/
 venv/
 env/
 
+
 # Environment variables
 .env
 .env.*
@@ -69,3 +70,6 @@ dmypy.json
 
 # Pyre
 .pyre/
+
+# Variable
+VARS.py 
