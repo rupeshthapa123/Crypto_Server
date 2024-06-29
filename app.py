@@ -9,9 +9,11 @@ from logout import logout
 import os
 import psycopg2
 from flask_login import login_required
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
+app.config['JWT_SECRET_KEY'] = 'your_jwt_secret_key'
 
 url = os.getenv("DATABASE_URL")
 conn = psycopg2.connect(url)
@@ -23,28 +25,29 @@ initialize_auth(app)
 def home():
     return check_app(curr)
 
-@app.route('/logout')
-@login_required
-def user_logout():
-    return logout()
+# @app.route('/logout')
+# @login_required
+# def user_logout():
+#     return logout()
 
 @app.route("/geckocoins")
-@login_required
+@jwt_required()
+# @login_required
 def gecko_coins():
     return coin_gecko()
 
 @app.route("/jupitercoin")
-@login_required
+@jwt_required()
 def jupitercoin():
     return coin_jupiter()
 
 @app.route("/dexscreener_coin/<string:coin_id>")
-@login_required
+@jwt_required()
 def dexscreener_coin_data(coin_id):
     return coin_dex(coin_id)
 
 @app.route("/wallet/<string:coin_id>")
-@login_required
+@jwt_required()
 def wallet_data(coin_id):
     return coin_wallet(coin_id)
 
