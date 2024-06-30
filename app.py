@@ -1,11 +1,11 @@
 from flask import Flask
-from geckocoin import coin_gecko
-from jupiter import coin_jupiter
-from dexscreener import coin_dex
-from coin_wallet import coin_wallet
-from check_app import check_app
+from services.geckocoin import coin_gecko
+from services.jupiter import coin_jupiter
+from services.dexscreener import coin_dex
+from services.coin_wallet import coin_wallet
+from services.check_app import check_app
 from auth import initialize_auth
-from logout import logout
+# from logout import logout
 import os
 import psycopg2
 from flask_login import login_required
@@ -24,11 +24,6 @@ initialize_auth(app)
 @app.route("/")
 def home():
     return check_app(curr)
-
-# @app.route('/logout')
-# @login_required
-# def user_logout():
-#     return logout()
 
 @app.route("/geckocoins")
 @jwt_required()
