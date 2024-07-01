@@ -12,12 +12,12 @@ import os
 import psycopg2
 from flask_login import login_required
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from config import Config
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your_secret_key'
-app.config['JWT_SECRET_KEY'] = 'your_jwt_secret_key'
+app.config.from_object(Config)
 
-url = os.getenv("DATABASE_URL")
+url = app.config['SQLALCHEMY_DATABASE_URI']
 conn = psycopg2.connect(url)
 curr = conn.cursor()
 

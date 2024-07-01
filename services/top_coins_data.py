@@ -10,7 +10,7 @@ def top_coins_data():
         result = []
         i = 0
 
-        while i<=99:
+        while i<=49:
             result.append(data[i])
             i+=1
 

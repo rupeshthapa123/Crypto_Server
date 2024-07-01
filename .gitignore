@@ -71,5 +71,3 @@ dmypy.json
 # Pyre
 .pyre/
 
-# Variable
-VARS.py 
