@@ -4,6 +4,8 @@ from services.jupiter import coin_jupiter
 from services.dexscreener import coin_dex
 from services.coin_wallet import coin_wallet
 from services.check_app import check_app
+from services.top_coins import top_coins
+from services.top_coins_data import top_coins_data
 from auth import initialize_auth
 # from logout import logout
 import os
@@ -45,6 +47,16 @@ def dexscreener_coin_data(coin_id):
 @jwt_required()
 def wallet_data(coin_id):
     return coin_wallet(coin_id)
+
+@app.route("/top_coins_jupiter")
+@jwt_required()
+def top_coins_jupiter():
+    return top_coins()
+
+@app.route("/top_coins_alldata")
+@jwt_required()
+def top_coins_alldata():
+    return top_coins_data()
 
 if __name__ == "__main__":
     app.run(debug=True)
