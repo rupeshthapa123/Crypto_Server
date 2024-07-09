@@ -7,6 +7,7 @@ class User(UserMixin, db.Model):
     __tablename__ = 'user_cred'
     email = db.Column(db.String(150), primary_key=True, unique=True, nullable=False)
     password_hash = db.Column(db.String(150), nullable=False)
+    last_logout = db.Column(db.DateTime, nullable=True)
 
 class TokenBlacklist(db.Model):
     __tablename__ = 'token_blacklist'
