@@ -35,7 +35,7 @@ def top_coins_data():
     try:
         response = requests.get(api_url_jupiter)
         data = response.json()
-        result = data[:100]
+        result = data[:20]
 
         with concurrent.futures.ThreadPoolExecutor() as executor:
             dex_data_futures = {executor.submit(fetch_dex_data, coin["base_address"]): coin for coin in result}
