@@ -21,7 +21,6 @@ env/
 .env.*
 
 # Configuration files
-config.py
 config.yaml
 config.yml
 
