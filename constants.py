@@ -1,0 +1,6 @@
+sol_holder_coin = 'https://api.solana.fm/v1/tokens/{coin_id}/holders'
+dex_coin_data = 'https://api.dexscreener.com/latest/dex/tokens/{coin_id}'
+gecko_coin = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=cad'
+jupiter_coins = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=cad'
+dex_single_coin = 'https://api.dexscreener.com/latest/dex/tokens/'
+jupiter_top_coins = 'https://stats.jup.ag/coingecko/tickers'

@@ -7,6 +7,7 @@ from services.check_app import check_app
 from services.top_coins import top_coins
 from services.top_coins_data import top_coins_data
 from services.holders import holders
+from services.coin_details import coin_details
 from auth import initialize_auth
 # from logout import logout
 import os
@@ -63,6 +64,11 @@ def top_coins_alldata():
 @jwt_required()
 def coin_holders_data(coin_id):
     return holders(coin_id)
+
+@app.route("/holder_dex_data/<string:coin_id>")
+@jwt_required()
+def coin_holders_dex_data(coin_id):
+    return coin_details(coin_id)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,8 +1,9 @@
 from flask import jsonify
 import requests
+from constants import *
 
 def top_coins():
-    api_url = 'https://stats.jup.ag/coingecko/tickers' 
+    api_url = jupiter_top_coins 
     try:
         response = requests.get(api_url)
         data = response.json()

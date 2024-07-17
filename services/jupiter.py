@@ -1,8 +1,9 @@
 from flask import jsonify
 import requests
+from constants import *
 
 def coin_jupiter():
-    api_url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=cad' 
+    api_url = jupiter_coins
     # headers = {
     #     'x_cg_pro_api_key': 'CG-6T5VV59o7CwUsNvkB3UrrQ8N',  
     #     'Content-Type': 'application/json'

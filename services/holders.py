@@ -1,9 +1,10 @@
 from flask import jsonify
 import requests
+from constants import *
 
 def holders(coin_id):
 
-    api_url = f'https://api.solana.fm/v1/tokens/{coin_id}/holders'
+    api_url = sol_holder_coin.format(coin_id=coin_id)
     # headers = {
     #     'x_cg_pro_api_key': 'CG-6T5VV59o7CwUsNvkB3UrrQ8N',  
     #     'Content-Type': 'application/json'

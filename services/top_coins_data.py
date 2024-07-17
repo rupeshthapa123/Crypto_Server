@@ -1,6 +1,7 @@
 from flask import jsonify
 import requests
 import concurrent.futures
+from constants import *
 
 def extract_keys(data, keys_to_extract):
     extracted_data = {}
@@ -19,7 +20,7 @@ def extract_keys(data, keys_to_extract):
         return extracted_data
 
 def fetch_dex_data(base_address):
-    api_url_dex = 'https://api.dexscreener.com/latest/dex/tokens/'
+    api_url_dex = dex_single_coin
     try:
         response = requests.get(f'{api_url_dex}{base_address}')
         data = response.json()
@@ -28,7 +29,7 @@ def fetch_dex_data(base_address):
         return None
 
 def top_coins_data():
-    api_url_jupiter = 'https://stats.jup.ag/coingecko/tickers' 
+    api_url_jupiter = jupiter_top_coins
     keys_to_extract = ["base_currency", "base_volume", "liquidity", "volume", "high", "last_price", "low"]
     final_res = []
 
