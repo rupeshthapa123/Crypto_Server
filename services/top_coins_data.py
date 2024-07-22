@@ -30,7 +30,7 @@ def fetch_dex_data(base_address):
 
 def top_coins_data():
     api_url_jupiter = jupiter_top_coins
-    keys_to_extract = ["base_currency", "base_volume", "liquidity", "volume", "high", "last_price", "low"]
+    keys_to_extract = ["base_currency", "base_address", "base_volume", "liquidity", "volume", "high", "last_price", "low"]
     final_res = []
 
     try:

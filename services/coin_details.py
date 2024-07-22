@@ -22,12 +22,12 @@ def coin_details(coin_id):
         holders_data_resp = holders_data_resp["tokenAccounts"]
         holders_data = []
 
-        print(holders_data_resp)
+        # print(holders_data_resp)
 
         for i in holders_data_resp:
             holders_data.append({key: i['info'][key] if key in i['info'] else i['info']['tokenAmount'][key] for key in holder_arr})
         
-        print(holders_data)
+        # print(holders_data)
 
         data = {"dex_data":dex_data, "holders_data":holders_data}
 
