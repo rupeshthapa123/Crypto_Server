@@ -1,10 +1,11 @@
 from flask import jsonify
 import requests
 import time
-from functions import fetch_data_from_api
+from helpers import fetch_data_from_api
+from constants import *
 
 def coin_gecko():
-    api_url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=cad'
+    api_url = gecko_coin
     data = fetch_data_from_api(api_url)
     data = data.get_json()
     if "payload" not in data:

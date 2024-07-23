@@ -21,7 +21,6 @@ env/
 .env.*
 
 # Configuration files
-config.py
 config.yaml
 config.yml
 
@@ -71,5 +70,3 @@ dmypy.json
 # Pyre
 .pyre/
 
-# Variable
-VARS.py 
