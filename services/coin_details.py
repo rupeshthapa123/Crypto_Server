@@ -6,7 +6,7 @@ def coin_details(coin_id):
     dex_coin_url = dex_coin_data.format(coin_id=coin_id)
     holders_url = sol_holder_coin.format(coin_id=coin_id)
 
-    dex_arr = ["baseToken","quoteToken","priceUsd","txns","volume","priceChange","liquidity","fdv"]
+    dex_arr = ["baseToken","quoteToken", "pairAddress","priceUsd","txns","volume","priceChange","liquidity","fdv"]
     holder_arr = ["owner","state","uiAmount"]
 
     try:

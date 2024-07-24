@@ -15,6 +15,7 @@ import psycopg2
 from flask_login import login_required
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from config import Config
+from closing_predict import closing_predict
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -69,6 +70,11 @@ def coin_holders_data(coin_id):
 @jwt_required()
 def coin_holders_dex_data(coin_id):
     return coin_details(coin_id)
+
+@app.route("/closing_predict/<string:pair_id>")
+@jwt_required()
+def closing_coin_predict(pair_id):
+    return closing_predict(pair_id)
 
 if __name__ == "__main__":
     app.run(debug=True)
