@@ -16,6 +16,7 @@ from flask_login import login_required
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from config import Config
 from closing_predict import closing_predict
+from model import load_model_and_scaler
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -25,6 +26,9 @@ conn = psycopg2.connect(url)
 curr = conn.cursor()
 
 initialize_auth(app)
+
+model, scaler = load_model_and_scaler('lstm_model.pth', 'scaler.pkl')
+input_size = 5
 
 @app.route("/")
 def home():
@@ -74,7 +78,7 @@ def coin_holders_dex_data(coin_id):
 @app.route("/closing_predict/<string:pair_id>")
 @jwt_required()
 def closing_coin_predict(pair_id):
-    return closing_predict(pair_id)
+    return closing_predict(pair_id, model, scaler, input_size)
 
 if __name__ == "__main__":
     app.run(debug=True)
