@@ -15,7 +15,7 @@ import psycopg2
 from flask_login import login_required
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from config import Config
-from closing_predict import closing_predict
+from services.closing_predict import closing_predict
 from model import load_model_and_scaler
 
 app = Flask(__name__)
